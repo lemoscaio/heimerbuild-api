@@ -6,9 +6,11 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./ -o ./dist",
+    "prisma:dev": "prisma migrate dev",
+    "prisma:test": "dotenv -e .env.test prisma migrate dev",
     "dev": "ts-node-dev -r tsconfig-paths/register --clear --respawn --rs --transpile-only --ignore-watch node_modules --watch package.json src/server.ts",
     "start": "node dist/src/server.js",
-    "test": "dotenv -e .env.test prisma migrate reset && cross-env dotenv -e .env.test jest -- --coverage -e -i"
+    "test": "cross-env dotenv -e .env.test jest -- --coverage -e -i"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +29,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.6",
