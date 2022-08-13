@@ -11,9 +11,66 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
   password String
+  builds   Build[]
 
   @@map("users")
+}
+
+model Build {
+  id           Int    @id @default(autoincrement())
+  userId       Int
+  championName String
+  championKey  String
+  cost         Int
+  level        Int
+
+  user  User    @relation(fields: [userId], references: [id])
+  stats Stats[]
+  items Item[]
+
+  @@map("builds")
+}
+
+model Stats {
+  id      Int @id @default(autoincrement())
+  buildId Int
+
+  attackDamage               Int
+  abilityPower               Int
+  armor                      Int
+  magicResistance            Int
+  attackSpeed                Int
+  abilityHaste               Int
+  criticalStrike             Int
+  movespeed                  Int
+  health                     Int
+  healthRegen                Int
+  mana                       Int
+  manaRegen                  Int
+  lethality                  Int
+  armorPenetration           Int
+  flatMagicPenetration       Int
+  percentageMagicPenetration Int
+  lifeSteal                  Int
+  physicalVamp               Int
+  omniVamp                   Int
+  attackRange                Int
+  tenacity                   Int
+
+  build Build @relation(fields: [buildId], references: [id])
+
+  @@map("stats")
+}
+
+model Item {
+  id      Int    @id @default(autoincrement())
+  buildId Int
+  itemId  String
+
+  buil Build @relation(fields: [buildId], references: [id])
+
+  @@map("items")
 }

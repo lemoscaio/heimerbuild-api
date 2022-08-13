@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-import * as userRepository from "@repositories/userRepository"
+import { userRepository } from "@repositories/userRepository"
 import { encrypt } from "@utils/encryptFunctions"
 import {
   conflictError,

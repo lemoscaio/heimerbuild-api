@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "type": "commonjs",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./ -o ./dist",
     "prisma:dev": "prisma migrate dev",
