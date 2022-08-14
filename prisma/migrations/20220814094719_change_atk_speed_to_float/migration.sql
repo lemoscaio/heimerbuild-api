@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "stats" ALTER COLUMN "attackSpeed" SET DATA TYPE DOUBLE PRECISION;

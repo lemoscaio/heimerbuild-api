@@ -44,14 +44,14 @@ model Stats {
   abilityPower               Int
   armor                      Int
   magicResistance            Int
-  attackSpeed                Int
+  attackSpeed                Float
   abilityHaste               Int
   criticalStrike             Int
   movespeed                  Int
   health                     Int
-  healthRegen                Int
+  healthRegen                Float
   mana                       Int
-  manaRegen                  Int
+  manaRegen                  Float
   lethality                  Int
   armorPenetration           Int
   flatMagicPenetration       Int
