@@ -1,8 +1,13 @@
 import jwt from "jsonwebtoken"
 import { NextFunction, Request, Response } from "express"
 import { unauthorizedError } from "@utils/errorUtils"
+import { userRepository } from "@repositories/userRepository"
 
-export function validateToken(req: Request, res: Response, next: NextFunction) {
+export async function validateToken(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   const { authorization } = req.headers
   const JWT_TOKEN = process.env.JWT_TOKEN
   const hasBearer = authorization?.match(/Bearer/)
@@ -21,7 +26,14 @@ export function validateToken(req: Request, res: Response, next: NextFunction) {
   try {
     const tokenData = JSON.stringify(jwt.verify(token, JWT_TOKEN))
     const parsedData: { email: string } = JSON.parse(tokenData)
-    res.locals.user = { email: parsedData.email }
+
+    const foundUser = await userRepository.findByEmail(parsedData.email)
+    delete foundUser.password
+
+    if (!foundUser)
+      throw unauthorizedError("No user found with the provided email")
+
+    res.locals.user = foundUser
   } catch (error) {
     throw unauthorizedError("Wrong or expired token")
   }

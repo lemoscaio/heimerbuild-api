@@ -4,4 +4,7 @@ import { Router } from "express"
 
 export const buildRouter = Router()
 
-buildRouter.get("/builds", validateToken, buildController.findAllByUserEmail)
+buildRouter.use(validateToken)
+buildRouter.get("/builds", buildController.findAllByUserId)
+buildRouter.post("/builds/create", buildController.insertBuild)
+buildRouter.delete("/builds/delete/:buildId", buildController.deleteBuild)

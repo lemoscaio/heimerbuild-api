@@ -24,19 +24,21 @@ model Build {
   userId       Int
   championName String
   championKey  String
-  cost         Int
+  cost         Int?   @default(-1)
   level        Int
 
-  user  User    @relation(fields: [userId], references: [id])
-  stats Stats[]
+  user User @relation(fields: [userId], references: [id])
+
   items Item[]
+  stats Stats?
 
   @@map("builds")
 }
 
 model Stats {
-  id      Int @id @default(autoincrement())
-  buildId Int
+  id      Int   @id @default(autoincrement())
+  buildId Int   @unique
+  build   Build @relation(fields: [buildId], references: [id])
 
   attackDamage               Int
   abilityPower               Int
@@ -59,8 +61,6 @@ model Stats {
   omniVamp                   Int
   attackRange                Int
   tenacity                   Int
-
-  build Build @relation(fields: [buildId], references: [id])
 
   @@map("stats")
 }
