@@ -10,10 +10,6 @@ import { notFoundError, unauthorizedError } from "@utils/errorUtils"
 export const buildService = {
   async findAllByUserId(id: number) {
     const builds = await buildRepository.findAllByUserId(id)
-    console.log(
-      `🚀 -> file: buildService.ts -> line 11 -> findAllByUserEmail -> builds`,
-      builds,
-    )
 
     const formattedBuilds = formatData.builds(builds)
 
@@ -42,10 +38,6 @@ export const buildService = {
 
   async deleteBuild(userId: number, buildId: number) {
     const foundBuild = await buildRepository.findById(buildId)
-    console.log(
-      `🚀 -> file: buildService.ts -> line 41 -> deleteBuild -> foundBuild`,
-      foundBuild,
-    )
 
     if (!foundBuild) throw notFoundError("This build doesn't exist")
     if (foundBuild.userId !== userId)

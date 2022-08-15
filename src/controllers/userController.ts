@@ -15,8 +15,6 @@ export async function registerUser(req: Request, res: Response) {
 export async function loginUser(req: Request, res: Response) {
   const { email, password }: { email: string; password: string } = req.body
 
-  console.log(req.body)
-
   const token = await userService.loginUser({ email, password })
 
   res.status(200).send({ token })
