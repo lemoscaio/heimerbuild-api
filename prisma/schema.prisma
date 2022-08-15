@@ -40,27 +40,27 @@ model Stats {
   buildId Int   @unique
   build   Build @relation(fields: [buildId], references: [id])
 
-  attackDamage               Int
-  abilityPower               Int
-  armor                      Int
-  magicResistance            Int
+  attackDamage               Float
+  abilityPower               Float
+  armor                      Float
+  magicResistance            Float
   attackSpeed                Float
-  abilityHaste               Int
-  criticalStrike             Int
-  movespeed                  Int
-  health                     Int
+  abilityHaste               Float
+  criticalStrike             Float
+  movespeed                  Float
+  health                     Float
   healthRegen                Float
-  mana                       Int
+  mana                       Float
   manaRegen                  Float
-  lethality                  Int
-  armorPenetration           Int
-  flatMagicPenetration       Int
-  percentageMagicPenetration Int
-  lifeSteal                  Int
-  physicalVamp               Int
-  omniVamp                   Int
-  attackRange                Int
-  tenacity                   Int
+  lethality                  Float
+  armorPenetration           Float
+  flatMagicPenetration       Float
+  percentageMagicPenetration Float
+  lifeSteal                  Float
+  physicalVamp               Float
+  omniVamp                   Float
+  attackRange                Float
+  tenacity                   Float
 
   @@map("stats")
 }
