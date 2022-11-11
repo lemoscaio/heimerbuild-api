@@ -63,8 +63,8 @@ const formatData = {
       },
     )
     formattedBuild.items = formattedItems
-    delete formattedBuild.stats.id
-    delete formattedBuild.stats.buildId
+    delete formattedBuild.stats?.id
+    delete formattedBuild.stats?.buildId
 
     return formattedBuild as CompleteBuild
   },
