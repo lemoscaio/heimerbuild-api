@@ -85,7 +85,7 @@ model Champion {
   icon             String
   resource         String
   attackType       String
-  adaptativeType   String
+  adaptiveType     String
   stats            Json
   roles            Roles[]
   attributeRatings Json
