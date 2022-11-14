@@ -1,5 +1,6 @@
-import { prisma } from "@config/database"
 import supertest from "supertest"
+
+import { prisma } from "@/config/database"
 import app from "../src/app"
 import { deleteAllData } from "./factories/scenarioFactory"
 import { userFactory } from "./factories/userFactory"

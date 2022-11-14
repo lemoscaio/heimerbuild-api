@@ -1,22 +1,34 @@
-import { getBaseUrl } from "@utils/apiPaths"
-import axios from "axios"
+import { meraki } from "@utils/externalApi"
+import { cache } from "@utils/cacheFunctions"
+import { env } from "@utils/envFunctions"
+import { appMode } from "@/server"
 
 export const championService = {
   async findAll() {
-    const API_URL = `${getBaseUrl()}/champions.json`
-    const result = await axios.get(API_URL)
+    const cachePath = "./data/champions.json"
 
-    const champions = result.data
+    if (appMode === "DEV" || appMode === "TEST") {
+      const cachedChampions = await cache.loadCachedFile(cachePath)
+      if (cachedChampions) return cachedChampions
+    }
 
+    const champions = await meraki.fetchFromExternalAPI("/champions.json")
+    await cache.writeJSONFile(cachePath, champions)
     return champions
   },
 
   async findByKey(championKey: string) {
-    const API_URL = `${getBaseUrl()}/champions/${championKey}.json`
+    const cachePath = `./data/${championKey}.json`
 
-    const result = await axios.get(API_URL)
+    if (appMode === "DEV" || appMode === "TEST") {
+      const cachedChampion = await cache.loadCachedFile(cachePath)
+      if (cachedChampion) return cachedChampion
+    }
 
-    const champion = result.data
+    const champion = await meraki.fetchFromExternalAPI(
+      `/champions/${championKey}.json`,
+    )
+    await cache.writeJSONFile(cachePath, champion)
 
     return champion
   },

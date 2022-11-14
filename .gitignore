@@ -1,3 +1,11 @@
+#Data used only for testing
+data/*.json
+
+# dotenv environment variables file
+.env
+.env.test
+.env.development
+
 #VS code config
 .vscode
 
@@ -70,10 +78,6 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
-
-# dotenv environment variables file
-.env
-.env.test
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

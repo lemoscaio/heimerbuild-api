@@ -11,7 +11,7 @@ export function handleError(
 
   if (isAppError(error)) {
     const statusCode = errorTypeToStatusCode(error.type)
-    res.status(statusCode).send(error.message)
+    return res.status(statusCode).send(error.message)
   }
 
   if (error.details)
@@ -19,5 +19,5 @@ export function handleError(
       .status(422)
       .send(error.details.map(({ message }: { message: string }) => message))
 
-  res.sendStatus(500)
+  return res.sendStatus(500)
 }

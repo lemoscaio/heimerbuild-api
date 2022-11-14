@@ -3,10 +3,10 @@ import dotenv from "dotenv"
 import express, { Request, Response } from "express"
 import "express-async-errors"
 
+dotenv.config()
+
 import { handleError } from "@middlewares/errorHandler"
 import { router } from "@routers/index"
-
-dotenv.config()
 
 const app = express()
 app.use(express.json())

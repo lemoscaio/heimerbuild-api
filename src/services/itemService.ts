@@ -1,22 +1,31 @@
-import { getBaseUrl } from "@utils/apiPaths"
-import axios from "axios"
+import { appMode } from "@/server"
+import { cache } from "@utils/cacheFunctions"
+import { meraki } from "@utils/externalApi"
 
 export const itemService = {
   async findAll() {
-    const API_URL = `${getBaseUrl()}/items.json`
-    const result = await axios.get(API_URL)
+    const cachePath = "./data/items.json"
 
-    const items = result.data
+    if (appMode === "DEV" || appMode === "TEST") {
+      const cachedItems = await cache.loadCachedFile(cachePath)
+      if (cachedItems) return cachedItems
+    }
 
+    const items = await meraki.fetchFromExternalAPI("/items.json")
+    await cache.writeJSONFile(cachePath, items)
     return items
   },
 
   async findById(itemId: string) {
-    const API_URL = `${getBaseUrl()}/items/${itemId}.json`
+    const cachePath = `./data/${itemId}.json`
 
-    const result = await axios.get(API_URL)
+    if (appMode === "DEV" || appMode === "TEST") {
+      const cachedItem = await cache.loadCachedFile(cachePath)
+      if (cachedItem) return cachedItem
+    }
 
-    const item = result.data
+    const item = await meraki.fetchFromExternalAPI(`/items/${itemId}.json`)
+    await cache.writeJSONFile(cachePath, item)
 
     return item
   },

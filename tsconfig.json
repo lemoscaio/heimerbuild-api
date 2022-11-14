@@ -16,7 +16,8 @@
       "@routers/*": ["./src/routers/*"],
       "@schemas/*": ["./src/schemas/*"],
       "@services/*": ["./src/services/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
 
@@ -26,6 +27,7 @@
     "removeComments": true,
 
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vitest/globals"]
   }
 }
