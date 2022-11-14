@@ -74,3 +74,48 @@ model Item {
 
   @@map("items")
 }
+
+model Champion {
+  id               Int     @id @default(autoincrement())
+  identifier       Int
+  key              String
+  name             String
+  title            String
+  fullName         String
+  icon             String
+  resource         String
+  attackType       String
+  adaptativeType   String
+  stats            Json
+  roles            Roles[]
+  attributeRatings Json
+  abilities        Json
+  releaseDate      String
+  releasePatch     String
+  patchLastChanged String
+  price            Json
+  lore             String
+  faction          String
+
+  @@map("champions")
+}
+
+enum Roles {
+  FIGHTER
+  JUGGERNAUT
+  TANK
+  ASSASSIN
+  BURST
+  MAGE
+  MARKSMAN
+  SUPPORT
+  VANGUARD
+  BATTLEMAGE
+  SPECIALIST
+  CATCHER
+  SKIRMISHER
+  WARDEN
+  DIVER
+  ENCHANTER
+  ARTILLERY
+}
