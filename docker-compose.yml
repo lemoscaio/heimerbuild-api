@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  redis-server:
+    container_name: redis-heimerbuild
+    image: redis/redis-stack
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  postgres-compose:
+    container_name: postgres-heimerbuild
+    image: postgres
+    environment:
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/PostgreSQL:/var/lib/postgresql/data
+    command: [ "postgres", "-c", "log_statement=all" ]

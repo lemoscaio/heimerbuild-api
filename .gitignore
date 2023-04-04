@@ -1,3 +1,6 @@
+#Postgres data
+.data/
+
 #Data used only for testing
 data/*.json
 
